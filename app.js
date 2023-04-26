@@ -14,7 +14,7 @@ const apiLimiter = require('./middlewares/apiLimiter');
 const { PORT = 3000 } = process.env;
 const app = express();
 app.use(helmet());
-app.use(apiLimiter());
+app.use(apiLimiter);
 
 mongoose.connect(addressMongodb)
   .then(() => {
