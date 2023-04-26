@@ -6,8 +6,8 @@ const NotFoundErr = require('../errors/NotFoundErr');
 
 const getMovies = async (req, res, next) => {
   const owner = req.user._id;
-  Movie.find({ 'owner': owner })
-  
+  Movie.find({ owner })
+
     .then((movies) => {
       res.send(movies);
     })
