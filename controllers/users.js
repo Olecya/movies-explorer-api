@@ -43,6 +43,9 @@ const patchUser = async (req, res, next) => {
       }
     })
     .catch((error) => {
+      if (error.code === 11000) {
+        next(new ConflictErr('Пользователь с такими e-mail уже существует'));
+      }
       if (error.name === 'ValidationError') {
         next(new BadRequestErr('Неверные данные'));
       } else {

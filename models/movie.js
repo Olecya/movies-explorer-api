@@ -12,12 +12,13 @@ const moviesSchema = new mongoose.Schema({
     required: [true],
   },
   movieId: {
-    type: String,
+    type: Number,
     required: [true],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: [true],
+    ref: 'user',
   },
   thumbnail: {
     type: String,
@@ -42,6 +43,10 @@ const moviesSchema = new mongoose.Schema({
       validator: (value) => validatorUser.isURL(value),
       massage: 'Invalid URL',
     },
+  },
+  year: {
+    type: String,
+    required: true,
   },
   description: {
     type: String,

@@ -15,19 +15,23 @@ routerMovies.get('/', getMovies);
 routerMovies.post('/', celebrate({
   body: Joi.object()
     .keys({
-      nameEN: Joi.string().required().min(2).max(30),
-      nameRU: Joi.string().required().min(2).max(30),
-      movieId: Joi.string().required().min(2).max(30),
+      nameEN: Joi.string().required(),
+      nameRU: Joi.string().required(),
+      movieId: Joi.number().required(),
       thumbnail: Joi.string().required().custom(urlValidator),
       trailerLink: Joi.string().required().custom(urlValidator),
       image: Joi.string().required().custom(urlValidator),
-      description: Joi.string().required().min(2).max(30),
-      duration: Joi.string().required().min(2).max(30),
-      director: Joi.string().required().min(2).max(30),
-      country: Joi.string().required().min(2).max(30),
+      description: Joi.string().required(),
+      year: Joi.string().required(),
+      duration: Joi.string().required(),
+      director: Joi.string().required(),
+      country: Joi.string().required(),
     }),
 }), postMovie);
 
-routerMovies.delete('/:id', deleteMovie);
+routerMovies.delete('/:id', celebrate({
+  params: Joi.object()
+    .keys({ id: Joi.string().required() }),
+}), deleteMovie);
 
 module.exports = routerMovies;

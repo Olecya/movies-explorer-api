@@ -22,7 +22,7 @@ router.post('/signup', celebrate({
 
 router.use('/users', auth, userRouter);
 router.use('/movies', auth, moviesRouter);
-router.use('*', (req, res, next) => {
+router.use('*', auth, (req, res, next) => {
   next(new NotFoundErr('404 Not Found'));
 });
 

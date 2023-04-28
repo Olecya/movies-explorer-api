@@ -5,7 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const router = require('./routes/routes');
+const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { addressMongodb } = require('./utils/config');
@@ -13,6 +13,7 @@ const apiLimiter = require('./middlewares/apiLimiter');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+app.use(requestLogger);
 app.use(helmet());
 app.use(apiLimiter);
 
@@ -23,8 +24,6 @@ mongoose.connect(addressMongodb)
   .catch((error) => {
     console.log(`Error during connection ${error}`);
   });
-
-app.use(requestLogger);
 
 app.use(cors({}));
 app.use(bodyParser.json());
