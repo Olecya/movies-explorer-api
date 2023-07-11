@@ -15,6 +15,7 @@ const getMovies = async (req, res, next) => {
 };
 
 const postMovie = async (req, res, next) => {
+  console.log(req.user);
   const owner = req.user;
   const {
     nameEN,
@@ -50,7 +51,7 @@ const postMovie = async (req, res, next) => {
     .catch((error) => {
       // console.log(error);
       if (error.name === 'ValidationError') {
-        next(new BadRequestErr('Неверные данные'));
+        next(new BadRequestErr('Неверные данные req.user'));
       } else {
         next(error);
       }

@@ -23,7 +23,7 @@ routerMovies.post('/', celebrate({
       image: Joi.string().required().custom(urlValidator),
       description: Joi.string().required(),
       year: Joi.string().required(),
-      duration: Joi.string().required(),
+      duration: Joi.number().required(),
       director: Joi.string().required(),
       country: Joi.string().required(),
     }),
